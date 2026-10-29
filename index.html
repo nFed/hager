@@ -64,7 +64,10 @@ section{padding-block:clamp(88px,12vw,160px)}
 .nav.solid{background:rgba(11,9,7,.86);backdrop-filter:blur(12px);border-color:var(--line-2)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:18px}
 .nav.solid .wrap{padding-block:12px}
-.brand{font-family:var(--display);font-weight:700;font-size:26px;text-decoration:none;line-height:1;color:var(--on-dark)}
+.brand{display:inline-flex;align-items:baseline;gap:10px;font-family:var(--display);font-weight:700;font-size:26px;text-decoration:none;line-height:1;color:var(--on-dark)}
+/* small lockup, same as the title: name in gold, a fine gold dash, then the meaning */
+.lk2{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:300;font-size:.66em;letter-spacing:.02em;color:var(--on-dark)}
+.lk2::before{content:"";width:.9em;height:1px;background:var(--gold-lite)}
 /* the small name stays out of the opening frame and arrives together with the bar's shade */
 .brand{opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .5s,transform .5s,visibility 0s .5s}
 .nav.brand-on .brand{opacity:1;visibility:visible;transform:none;transition:opacity .5s,transform .5s,visibility 0s}
@@ -83,7 +86,7 @@ dialog.mnav[open]{display:flex;animation:mfade .45s ease-out both}
 dialog.mnav::backdrop{background:var(--ink)}
 @keyframes mfade{from{opacity:0}to{opacity:1}}
 .mnav .x{position:absolute;top:calc(18px + env(safe-area-inset-top,0px));left:max(20px,env(safe-area-inset-left,0px))}
-.mnav .mbrand{position:absolute;top:calc(24px + env(safe-area-inset-top,0px));right:max(20px,env(safe-area-inset-right,0px));font-family:var(--display);font-weight:700;font-size:26px;line-height:1}
+.mnav .mbrand{display:inline-flex;align-items:baseline;gap:10px;position:absolute;top:calc(24px + env(safe-area-inset-top,0px));right:max(20px,env(safe-area-inset-right,0px));font-family:var(--display);font-weight:700;font-size:26px;line-height:1}
 .mnav ol{list-style:none;margin:0;padding:0;display:grid;gap:4px;counter-reset:m}
 .mnav li{counter-increment:m;border-bottom:1px solid var(--line-2);animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
 .mnav li:nth-child(2){animation-delay:.04s}.mnav li:nth-child(3){animation-delay:.08s}.mnav li:nth-child(4){animation-delay:.12s}.mnav li:nth-child(5){animation-delay:.16s}.mnav li:nth-child(6){animation-delay:.2s}.mnav li:nth-child(7){animation-delay:.24s}
@@ -367,7 +370,7 @@ footer p{color:var(--dim);font-size:13px;letter-spacing:.04em;max-width:80ch}
  
 <nav class="nav" id="nav" aria-label="ניווט ראשי">
   <div class="wrap">
-    <a class="brand metal" href="#top">האגר</a>
+    <a class="brand" href="#top" aria-label="האגר – ארץ"><span class="metal">האגר</span><span class="lk2" aria-hidden="true">ארץ</span></a>
     <ul>
       <li><a href="#screenings">הקרנות</a></li>
       <li><a href="#story">על הסרט</a></li>
@@ -383,7 +386,7 @@ footer p{color:var(--dim);font-size:13px;letter-spacing:.04em;max-width:80ch}
   </div>
 </nav>
 <dialog class="mnav" id="menuDlg" aria-label="תפריט">
-  <span class="mbrand metal">האגר</span>
+  <span class="mbrand"><span class="metal">האגר</span><span class="lk2">ארץ</span></span>
   <button class="x" type="button" id="menuClose" aria-label="סגירת התפריט">×</button>
   <ol>
     <li><a href="#screenings">הקרנות</a></li>
