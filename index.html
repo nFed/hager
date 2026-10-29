@@ -134,6 +134,31 @@ section{padding-block:clamp(88px,12vw,160px)}
   .hero-grid{gap:12px}.hero h1 .t1{font-size:clamp(68px,21vw,104px)}.hero .tag{font-size:16px}
 }
 
+@media (max-width:900px){
+  /* Mobile frame, poster logic: the picture owns the top, the title lockup sits on its faded lower edge, the credit and everything else below the faces */
+  .hero-bg{aspect-ratio:1/.82;
+    -webkit-mask-image:linear-gradient(to top,transparent 0%,rgba(0,0,0,.18) 12%,rgba(0,0,0,.5) 24%,rgba(0,0,0,.82) 38%,#000 54%);
+    mask-image:linear-gradient(to top,transparent 0%,rgba(0,0,0,.18) 12%,rgba(0,0,0,.5) 24%,rgba(0,0,0,.82) 38%,#000 54%)}
+  .hero-bg img{object-position:42% 30%}
+  .hero .wrap{padding-block:calc(54vw + 4px) 28px}
+  .award small{white-space:nowrap;letter-spacing:.06em}
+  .hero-grid{gap:0}
+  .hero h1{order:1;display:flex;align-items:baseline;flex-wrap:wrap;gap:0 14px;text-shadow:0 2px 24px rgba(11,9,7,.55)}
+  .hero h1 .t1{font-size:clamp(74px,23vw,124px)}
+  .hero h1 .t2{font-size:clamp(26px,7.6vw,40px);margin-top:0;gap:12px}
+  .hero h1 .t2::before{width:clamp(18px,6vw,32px);align-self:center;margin-top:.15em}
+  .hero-txt>.eyebrow{order:2;margin-top:12px;font-size:11px;letter-spacing:.26em;gap:10px}
+  .hero-txt>.eyebrow::before{width:24px}
+  .hero-txt>.eyebrow .no{display:none}
+  .awards{order:3;margin-block:20px 0}
+  .hero .tag{order:4;margin-top:18px}
+  .hero .meta{order:5;margin-top:10px}
+  .acts{order:6;margin-top:22px}
+}
+@media (max-width:900px) and (max-height:700px){
+  .awards{margin-top:16px}.hero .tag{margin-top:14px}.acts{margin-top:18px}
+}
+
 /* screenings */
 .screens{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(40px,7vw,120px);align-items:start}
 .screens .side{display:grid;gap:22px;position:sticky;top:110px}
