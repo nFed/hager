@@ -93,7 +93,8 @@ section{padding-block:clamp(88px,12vw,160px)}
 .awards{display:grid;gap:22px;justify-items:center}
 .award{display:flex;align-items:center;gap:2px;color:#F1DFA9}
 .award .lv{flex-shrink:0;width:34px;height:72px;display:block;overflow:visible;filter:drop-shadow(0 1px 6px rgba(0,0,0,.45))}
-.award .lv:last-child{transform:scaleX(-1)}
+/* in RTL the first svg sits on the right, so that is the branch to mirror: both branches curve around the text */
+.award .lv:first-child{transform:scaleX(-1)}
 .award .lv{animation:grow 1.8s cubic-bezier(.2,.7,.2,1) 1s both}
 .award+.award .lv{animation-delay:1.25s}
 @keyframes grow{from{clip-path:inset(100% 0 0 0);opacity:.2}to{clip-path:inset(0 0 0 0);opacity:1}}
