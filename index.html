@@ -237,14 +237,32 @@ dialog.mnav::backdrop{background:var(--ink)}
   .story .wrap{padding-top:0;margin-top:-60px;position:relative}
 }
 
-/* interlude */
-.inter{position:relative;padding:0;height:clamp(420px,72vw,820px);overflow:hidden;display:grid;place-items:center;isolation:isolate;text-align:center}
-.inter img{position:absolute;inset:-8% 0;width:100%;height:116%;object-fit:cover;z-index:-2;will-change:transform}
-.inter::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(var(--ink) 0%,rgba(11,9,7,.35) 22%,rgba(11,9,7,.35) 78%,var(--ink) 100%),radial-gradient(ellipse at center,rgba(11,9,7,.45),transparent 70%)}
-.inter blockquote{display:grid;gap:18px;justify-items:center;padding-inline:20px}
-.inter .am{font-family:var(--display);font-size:clamp(64px,11vw,160px);font-weight:700;line-height:.9;text-shadow:0 6px 40px rgba(0,0,0,.5)}
-.inter p{font-family:var(--display);font-size:clamp(20px,2.4vw,30px);max-width:26ch;line-height:1.4;text-shadow:0 2px 20px rgba(0,0,0,.7)}
+/* interlude: the waterfall frame shown whole and bright; the name of the film sits beside the falls on the dark cliff, never on the water */
+.inter{position:relative;padding:0;height:min(41.8vw,780px);min-height:440px;overflow:hidden;display:grid;align-items:center;justify-items:end;isolation:isolate}
+.inter-img{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.inter-img img{position:absolute;inset:-6% 0;width:100%;height:112%;object-fit:cover;object-position:50% 40%;will-change:transform}
+.inter::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(to right,rgba(11,9,7,.78) 0%,rgba(11,9,7,.5) 22%,rgba(11,9,7,.12) 42%,transparent 58%),
+  linear-gradient(var(--ink) 0%,transparent 9%,transparent 91%,var(--ink) 100%)}
+.inter blockquote{display:grid;gap:14px;justify-items:start;text-align:start;padding-left:var(--gut-l);padding-right:var(--gut-r);width:min(100%,calc(var(--gut-l) + 400px));margin-inline-start:auto}
 .inter .gloss{font-size:12px;letter-spacing:.3em;color:var(--gold-lite);font-family:var(--sans);font-weight:500}
+.inter .lock{display:flex;align-items:baseline;gap:0 18px;flex-wrap:wrap}
+.inter .am{font-family:var(--display);font-size:clamp(64px,7.6vw,128px);font-weight:700;line-height:.9;filter:drop-shadow(0 6px 30px rgba(0,0,0,.45))}
+.inter .mean{display:flex;align-items:center;gap:14px;font-family:var(--display);font-weight:300;font-size:clamp(28px,3vw,46px);line-height:1;text-shadow:0 2px 16px rgba(0,0,0,.6)}
+.inter .mean::before{content:"";width:clamp(24px,3vw,44px);height:1px;background:var(--gold-lite)}
+.inter p{font-family:var(--display);font-size:clamp(18px,1.6vw,23px);max-width:28ch;line-height:1.5;color:var(--on-dark);text-shadow:0 2px 16px rgba(0,0,0,.75);text-wrap:pretty;margin-top:6px}
+.inter p strong{display:block;font-weight:500;color:var(--gold-lite)}
+@media (max-width:760px){
+  /* phone: the frame stays clean, the words follow it as a title card */
+  .inter{height:auto;min-height:0;display:block;justify-items:normal;padding-bottom:clamp(56px,14vw,80px)}
+  .inter-img{position:relative;inset:auto;width:100%;aspect-ratio:1/.82;max-width:100%;
+    -webkit-mask-image:linear-gradient(transparent 0%,#000 8%,#000 80%,transparent 100%);mask-image:linear-gradient(transparent 0%,#000 8%,#000 80%,transparent 100%)}
+  .inter-img img{object-position:38% 50%}
+  .inter::before{display:none}
+  .inter blockquote{width:100%;margin-top:-28px;position:relative;justify-items:center;text-align:center;gap:12px}
+  .inter .lock{justify-content:center}
+  .inter p{margin-top:2px;max-width:30ch}
+}
 
 /* characters */
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px 40px;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,64px)}
@@ -433,11 +451,11 @@ footer p{color:var(--dim);font-size:13px;letter-spacing:.04em;max-width:80ch}
   </section>
 
   <section class="inter" aria-label="משמעות שם הסרט">
-    <img id="interImg" src="img/waterfall-1920.webp" srcset="img/waterfall-960.webp 960w, img/waterfall-1920.webp 1920w" sizes="100vw" alt="" loading="lazy">
+    <div class="inter-img"><img id="interImg" src="img/waterfall-1920.webp" srcset="img/waterfall-960.webp 960w, img/waterfall-1920.webp 1920w" sizes="100vw" alt="מפל ברמות אתיופיה" loading="lazy"></div>
     <blockquote>
       <span class="gloss">באמהרית</span>
-      <span class="am metal">האגר</span>
-      <p>ארץ. מולדת. בשם הסרט טמונה השאלה כולה.</p>
+      <span class="lock"><span class="am metal">האגר</span><span class="mean">ארץ</span></span>
+      <p><strong>מילה אחת ושתי ארצות.</strong>האדמה שעליה בנו את חייהם, והארץ שאליה חלמו להגיע במשך דורות.</p>
     </blockquote>
   </section>
 
