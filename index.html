@@ -35,6 +35,8 @@ h1,h2,h3,p,dl,dd,dt,figure,blockquote{margin:0;padding:0}
 img{display:block;max-width:100%}
 [hidden]{display:none!important}
 ::selection{background:#F6D98C;color:var(--ink)}
+/* touch screens: a tap on text should not select a word and open the browser's search panel */
+@media (hover:none) and (pointer:coarse){body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}}
 a{color:inherit}
 :focus-visible{outline:1px solid var(--gold-lite);outline-offset:4px}
 .wrap{max-width:1320px;margin-inline:auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
