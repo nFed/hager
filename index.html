@@ -154,6 +154,15 @@ section{padding-block:clamp(88px,12vw,160px)}
   .hero .tag{order:4;margin-top:18px}
   .hero .meta{order:5;margin-top:10px}
   .acts{order:6;margin-top:22px}
+  /* centred: the frame is symmetric (Sarah left, Yitzhak right, a laurel pair), so the lockup sits on its axis */
+  .hero-grid{align-items:center;text-align:center}
+  .hero h1{justify-content:center}
+  .hero-txt>.eyebrow{justify-content:center}
+  .hero-txt>.eyebrow::after{content:"";width:24px;height:1px;background:var(--gold)}
+  .hero .tag{max-width:none;margin-inline:auto}
+  .hero .tag .tl{display:block}
+  .hero .meta{justify-content:center}
+  .acts{width:100%}
 }
 @media (max-width:900px) and (max-height:700px){
   .awards{margin-top:16px}.hero .tag{margin-top:14px}.acts{margin-top:18px}
@@ -318,7 +327,7 @@ footer p{color:var(--dim);font-size:13px;letter-spacing:.04em;max-width:80ch}
       <div class="hero-txt">
         <div class="eyebrow rise">סרט מאת שמואל ברו <span class="no">2026</span></div>
         <h1 class="rise d1"><span class="t1 metal">האגר</span><span class="t2">ארץ</span></h1>
-        <p class="tag rise d2">אפוס על פני שתי יבשות. משפחה אחת, מסע רגלי דרך סודן, והשאלה מה נקרא בית.</p>
+        <p class="tag rise d2"><span class="tl">אפוס על פני שתי יבשות.</span> <span class="tl">משפחה אחת, מסע רגלי דרך סודן,</span> <span class="tl">והשאלה מה נקרא בית.</span></p>
         <div class="meta rise d3"><span>87 דקות</span><span>אמהרית · עברית · ערבית</span><span>אתיופיה · ישראל</span></div>
         <div class="acts rise d4">
           <a class="btn solid" href="#screenings">להקרנות ולכרטיסים</a>
