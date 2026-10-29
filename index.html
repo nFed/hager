@@ -330,8 +330,9 @@ dialog .x{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));left:calc
 /* director */
 .dir{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(40px,7vw,120px);align-items:center}
 .dir .ph{position:relative;aspect-ratio:4/5;overflow:hidden;background:#1a1612}
-.dir .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;filter:grayscale(1) contrast(1.15) brightness(.82)}
-.dir .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,9,7,.7),transparent 45%),rgba(201,168,76,.12);mix-blend-mode:multiply}
+.dir .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;filter:grayscale(1) contrast(1.42) brightness(.9)}
+/* studio portrait: the pale backdrop is pulled down into the page black with a vignette, the face keeps its light */
+.dir .ph::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 62% 54% at 46% 34%,transparent 30%,rgba(11,9,7,.5) 72%,rgba(11,9,7,.85) 100%),linear-gradient(to top,rgba(11,9,7,.75),transparent 42%),rgba(201,168,76,.14);mix-blend-mode:multiply}
 .dir .txt{display:grid;gap:24px}
 .dir h2{font-family:var(--display);font-weight:500;font-size:clamp(44px,5.4vw,80px);line-height:1}
 .dir p{color:var(--soft);max-width:54ch}
