@@ -66,7 +66,29 @@ section{padding-block:clamp(88px,12vw,160px)}
 .nav ul{display:flex;gap:32px;list-style:none;margin:0;padding:0;font-size:14px;letter-spacing:.08em}
 .nav ul a{text-decoration:none;color:rgba(246,238,224,.75);transition:color .2s}
 .nav ul a:hover{color:var(--gold-lite)}
-@media (max-width:900px){.nav ul{display:none}}
+.nav-end{display:flex;align-items:center;gap:10px}
+.menu-btn{display:none;width:44px;height:44px;padding:0;border:1px solid rgba(246,238,224,.45);border-radius:2px;background:rgba(11,9,7,.25);backdrop-filter:blur(6px);color:var(--on-dark);cursor:pointer;place-items:center;transition:background .3s,color .3s}
+.menu-btn:hover{background:var(--on-dark);color:var(--ink)}
+.menu-btn svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.4;fill:none}
+/* mobile menu: a full black frame, like a title card between scenes */
+dialog.mnav{width:100%;height:100%;max-width:none;max-height:none;margin:0;background:var(--ink);
+  padding:calc(env(safe-area-inset-top,0px) + 92px) max(24px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 40px) max(24px,env(safe-area-inset-left,0px));
+  display:none;flex-direction:column;justify-content:space-between;gap:32px;overflow-y:auto}
+dialog.mnav[open]{display:flex;animation:mfade .45s ease-out both}
+dialog.mnav::backdrop{background:var(--ink)}
+@keyframes mfade{from{opacity:0}to{opacity:1}}
+.mnav .x{position:absolute;top:calc(18px + env(safe-area-inset-top,0px));left:max(20px,env(safe-area-inset-left,0px))}
+.mnav .mbrand{position:absolute;top:calc(24px + env(safe-area-inset-top,0px));right:max(20px,env(safe-area-inset-right,0px));font-family:var(--display);font-weight:700;font-size:26px;line-height:1}
+.mnav ol{list-style:none;margin:0;padding:0;display:grid;gap:4px;counter-reset:m}
+.mnav li{counter-increment:m;border-bottom:1px solid var(--line-2);animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.mnav li:nth-child(2){animation-delay:.04s}.mnav li:nth-child(3){animation-delay:.08s}.mnav li:nth-child(4){animation-delay:.12s}.mnav li:nth-child(5){animation-delay:.16s}.mnav li:nth-child(6){animation-delay:.2s}.mnav li:nth-child(7){animation-delay:.24s}
+.mnav li a{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-block:12px;text-decoration:none;font-family:var(--display);font-size:clamp(30px,9vw,40px);font-weight:500;line-height:1.15}
+.mnav li a::after{content:counter(m,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--dim)}
+.mnav li a:hover,.mnav li a:focus-visible{color:var(--gold-lite)}
+.mnav .mfoot{display:grid;gap:16px}
+.mnav .mfoot .btn{width:100%}
+.mnav .mfoot p{font-size:12px;letter-spacing:.2em;color:var(--gold-lite);text-align:center}
+@media (max-width:900px){.nav ul{display:none}.menu-btn{display:grid}}
 
 /* hero */
 .hero{position:relative;min-height:min(100svh,1000px);display:grid;align-items:end;overflow:hidden;isolation:isolate}
@@ -325,9 +347,29 @@ footer p{color:var(--dim);font-size:13px;letter-spacing:.04em;max-width:80ch}
       <li><a href="#gallery">גלריה</a></li>
       <li><a href="#director">הבמאי</a></li>
     </ul>
-    <a class="btn sm" href="#screenings">כרטיסים</a>
+    <div class="nav-end">
+      <a class="btn sm" href="#screenings">כרטיסים</a>
+      <button class="menu-btn" type="button" id="menuBtn" aria-label="תפריט" aria-haspopup="dialog" aria-controls="menuDlg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button>
+    </div>
   </div>
 </nav>
+<dialog class="mnav" id="menuDlg" aria-label="תפריט">
+  <span class="mbrand metal">האגר</span>
+  <button class="x" type="button" id="menuClose" aria-label="סגירת התפריט">×</button>
+  <ol>
+    <li><a href="#screenings">הקרנות</a></li>
+    <li><a href="#story">על הסרט</a></li>
+    <li><a href="#cast">הדמויות</a></li>
+    <li><a href="#production">ההפקה</a></li>
+    <li><a href="#gallery">גלריה</a></li>
+    <li><a href="#director">הבמאי</a></li>
+    <li><a href="#credits">קרדיטים</a></li>
+  </ol>
+  <div class="mfoot">
+    <a class="btn solid" href="#screenings">להקרנות ולכרטיסים</a>
+    <p>סרט מאת שמואל ברו</p>
+  </div>
+</dialog>
 
 <header class="hero" id="top">
   <div class="hero-bg"><img src="img/sarah-yitzhak-1920.webp" srcset="img/sarah-yitzhak-960.webp 960w, img/sarah-yitzhak-1920.webp 1920w" sizes="(max-width:900px) 100vw, 64vw" alt="שרה ויצחק יושבים בין בני הכפר" fetchpriority="high"></div>
@@ -529,6 +571,13 @@ const hhmm=t=>String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).pa
   btn.onclick=()=>{vid.innerHTML='';const f=document.createElement('iframe');f.src=src;f.title='הטריילר של האגר – ארץ';f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;vid.append(f);dlg.showModal&&dlg.showModal();};
   const close=()=>{dlg.close();};
   document.getElementById('trClose').onclick=close;dlg.addEventListener('click',e=>{if(e.target===dlg)close();});dlg.addEventListener('close',()=>{vid.innerHTML='';});
+})();
+(function(){
+  const dlg=document.getElementById('menuDlg'),btn=document.getElementById('menuBtn');
+  btn.onclick=()=>{dlg.showModal&&dlg.showModal();btn.setAttribute('aria-expanded','true');};
+  dlg.addEventListener('close',()=>btn.setAttribute('aria-expanded','false'));
+  document.getElementById('menuClose').onclick=()=>dlg.close();
+  dlg.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();dlg.close();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});}));
 })();
 (function(){
   const nav=document.getElementById('nav'),im=document.getElementById('interImg');
