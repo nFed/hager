@@ -237,20 +237,29 @@ dialog.mnav::backdrop{background:var(--ink)}
   .story .wrap{padding-top:0;margin-top:-60px;position:relative}
 }
 
-/* interlude: one clean frame at the film's own 2.39:1, black above and below like a screen, the word set under it as a quiet entry */
-.inter{padding-block:clamp(8px,2vw,32px) clamp(72px,9vw,128px);display:grid;gap:clamp(28px,3.4vw,44px);justify-items:center;text-align:center}
-.inter-img{position:relative;width:100%;aspect-ratio:2.39/1;overflow:hidden;background:var(--ink-2)}
-.inter-img img{position:absolute;inset:-5% 0;width:100%;height:110%;object-fit:cover;object-position:50% 45%;will-change:transform}
-.inter blockquote{display:grid;gap:12px;justify-items:center;padding-left:var(--gut-l);padding-right:var(--gut-r)}
-.inter .ge{font-family:'Noto Serif Ethiopic',serif;font-weight:500;font-size:clamp(17px,1.5vw,20px);letter-spacing:.32em;color:var(--gold-lite)}
-.inter .lock{display:flex;align-items:baseline;justify-content:center;gap:0 18px;flex-wrap:wrap;font-family:var(--display);line-height:1}
-.inter .am{font-size:clamp(46px,4.6vw,72px);font-weight:700}
-.inter .mean{display:flex;align-items:center;gap:14px;font-weight:300;font-size:clamp(26px,2.4vw,38px)}
+/* interlude: one frame at the film's own 2.39:1; the name sits low in the frame like an opening title, over the pool and path, never on the falls. Two layers drift apart on scroll. */
+.inter{padding-block:clamp(8px,2vw,32px) clamp(72px,9vw,128px)}
+.frame{position:relative;width:100%;aspect-ratio:2.39/1;min-height:420px;overflow:hidden;isolation:isolate;background:var(--ink-2);display:grid;align-items:end;justify-items:start;text-align:start}
+.inter-img{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.inter-img img{position:absolute;inset:-6% 0;width:100%;height:112%;object-fit:cover;object-position:50% 42%;will-change:transform}
+.frame::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+  linear-gradient(to top,rgba(11,9,7,.78) 0%,rgba(11,9,7,.42) 26%,transparent 52%),
+  linear-gradient(to left,rgba(11,9,7,.55) 0%,rgba(11,9,7,.2) 30%,transparent 48%),
+  radial-gradient(ellipse 120% 90% at 50% 45%,transparent 60%,rgba(11,9,7,.35) 100%)}
+.inter blockquote{display:grid;gap:10px;justify-items:start;max-width:calc(max(var(--gut-r),(100% - 1320px)/2 + var(--gut-r)) + 540px);padding:0 max(var(--gut-r),calc((100% - 1320px)/2 + var(--gut-r))) clamp(32px,4.4vw,64px) var(--gut-l);will-change:transform}
+.inter .ge{font-family:'Noto Serif Ethiopic',serif;font-weight:500;font-size:clamp(16px,1.4vw,19px);letter-spacing:.32em;color:var(--gold-lite);text-shadow:0 1px 12px rgba(0,0,0,.6)}
+.inter .lock{display:flex;align-items:baseline;justify-content:flex-start;gap:0 18px;flex-wrap:wrap;font-family:var(--display);line-height:1}
+.inter .am{font-size:clamp(48px,5vw,80px);font-weight:700;filter:drop-shadow(0 4px 24px rgba(0,0,0,.5))}
+.inter .mean{display:flex;align-items:center;gap:14px;font-weight:300;font-size:clamp(26px,2.5vw,40px);text-shadow:0 2px 16px rgba(0,0,0,.7)}
 .inter .mean::before{content:"";width:clamp(22px,2.4vw,36px);height:1px;background:var(--gold-lite)}
-.inter p{font-family:var(--display);font-size:clamp(17px,1.5vw,21px);line-height:1.55;color:var(--soft);max-width:46ch;text-wrap:balance;margin-top:4px}
+.inter p{font-family:var(--display);font-size:clamp(16px,1.45vw,21px);line-height:1.5;color:var(--on-dark);max-width:46ch;text-wrap:balance;margin-top:4px;text-shadow:0 2px 14px rgba(0,0,0,.85)}
 @media (max-width:760px){
-  .inter-img{aspect-ratio:4/3}
-  .inter-img img{object-position:40% 50%}
+  .frame{aspect-ratio:4/5;min-height:0;justify-items:center;text-align:center}
+  .inter blockquote{justify-items:center;max-width:none}
+  .inter .lock{justify-content:center}
+  .inter-img img{object-position:52% 50%}
+  .frame::before{background:linear-gradient(to top,rgba(11,9,7,.88) 0%,rgba(11,9,7,.55) 28%,rgba(11,9,7,.1) 50%,transparent 62%)}
+  .inter p{max-width:30ch}
 }
 
 /* characters */
@@ -440,12 +449,14 @@ footer p{color:var(--dim);font-size:13px;letter-spacing:.04em;max-width:80ch}
   </section>
 
   <section class="inter" aria-label="משמעות שם הסרט">
-    <div class="inter-img"><img id="interImg" src="img/waterfall-1920.webp" srcset="img/waterfall-960.webp 960w, img/waterfall-1920.webp 1920w" sizes="100vw" alt="מפל ברמות אתיופיה" loading="lazy"></div>
+    <div class="frame">
+    <div class="inter-img"><img id="interImg" src="img/waterfall-1920.webp" srcset="img/waterfall-960.webp 960w, img/waterfall-1920.webp 1920w" sizes="(max-width:760px) 300vw, 100vw" alt="מפל ברמות אתיופיה" loading="lazy"></div>
     <blockquote>
       <span class="ge" lang="am" title="האגר באמהרית">ሀገር</span>
       <span class="lock"><span class="am metal">האגר</span><span class="mean">ארץ</span></span>
       <p>באמהרית, ארץ. האדמה שעליה בנו את חייהם, והארץ שאליה חלמו להגיע במשך דורות.</p>
     </blockquote>
+    </div>
   </section>
 
   <section id="cast">
@@ -597,12 +608,12 @@ const hhmm=t=>String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).pa
   dlg.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();dlg.close();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});}));
 })();
 (function(){
-  const nav=document.getElementById('nav'),im=document.getElementById('interImg');
+  const nav=document.getElementById('nav'),im=document.getElementById('interImg'),iq=document.querySelector('.inter blockquote');
   const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
   let tick=false;
   const on=()=>{tick=false;const past=scrollY>60;nav.classList.toggle('solid',past);
     nav.classList.toggle('brand-on',past);
-    if(!still&&im){const r=im.parentElement.getBoundingClientRect();const p=(r.top+r.height/2-innerHeight/2)/innerHeight;im.style.transform=`translateY(${p*-8}%)`;}};
+    if(!still&&im){const r=im.parentElement.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight){const p=Math.max(-1,Math.min(1,(r.top+r.height/2-innerHeight/2)/innerHeight));im.style.transform=`translateY(${p*-4.5}%) scale(1.02)`;if(iq)iq.style.transform=`translateY(${p*22}px)`;}}};
   addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(on);}},{passive:true});on();
 })();
 </script>
