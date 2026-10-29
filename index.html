@@ -63,7 +63,7 @@ section{padding-block:clamp(88px,12vw,160px)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:18px}
 .nav.solid .wrap{padding-block:12px}
 .brand{font-family:var(--display);font-weight:700;font-size:26px;text-decoration:none;line-height:1;color:var(--on-dark)}
-/* the small name waits until the big title has left the screen, so the opening shows the name once */
+/* the small name stays out of the opening frame and arrives together with the bar's shade */
 .brand{opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .5s,transform .5s,visibility 0s .5s}
 .nav.brand-on .brand{opacity:1;visibility:visible;transform:none;transition:opacity .5s,transform .5s,visibility 0s}
 .nav ul{display:flex;gap:32px;list-style:none;margin:0;padding:0;font-size:14px;letter-spacing:.08em}
@@ -586,9 +586,8 @@ const hhmm=t=>String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).pa
   const nav=document.getElementById('nav'),im=document.getElementById('interImg');
   const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
   let tick=false;
-  const h1=document.querySelector('.hero h1');
-  const on=()=>{tick=false;nav.classList.toggle('solid',scrollY>60);
-    nav.classList.toggle('brand-on',!h1||h1.getBoundingClientRect().bottom<nav.offsetHeight);
+  const on=()=>{tick=false;const past=scrollY>60;nav.classList.toggle('solid',past);
+    nav.classList.toggle('brand-on',past);
     if(!still&&im){const r=im.parentElement.getBoundingClientRect();const p=(r.top+r.height/2-innerHeight/2)/innerHeight;im.style.transform=`translateY(${p*-8}%)`;}};
   addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(on);}},{passive:true});on();
 })();
