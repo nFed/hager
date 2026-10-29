@@ -329,7 +329,14 @@ dialog .x{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));left:calc
 .credits dt{text-align:left;font-size:12px;letter-spacing:.26em;color:var(--gold-lite);font-weight:500;direction:rtl}
 .credits dd{text-align:right;font-family:var(--display);font-size:20px;line-height:1.5}
 .credits dt{order:0}
-@media (max-width:560px){.credits div{grid-template-columns:minmax(0,1fr);gap:4px}.credits dt,.credits dd{text-align:center}}
+@media (max-width:560px){
+  /* phone: a compact two-column roll, role on the right, names beside it */
+  .credits-sec{padding-block:56px 48px}
+  .credits{gap:0;margin-top:28px;border-top:1px solid var(--line-2)}
+  .credits div{grid-template-columns:minmax(0,86px) minmax(0,1fr);gap:12px;padding-block:9px;border-bottom:1px solid var(--line-2)}
+  .credits dt{text-align:right;font-size:10.5px;letter-spacing:.14em;line-height:1.9}
+  .credits dd{text-align:right;font-size:15.5px;line-height:1.42}
+}
 
 footer{border-top:1px solid var(--line-2);padding-block:56px 64px;text-align:center}
 footer .wrap{display:grid;gap:14px;justify-items:center}
