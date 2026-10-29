@@ -176,7 +176,7 @@ dialog.mnav::backdrop{background:var(--ink)}
   .hero-grid{gap:0}
   .hero h1{order:1;display:flex;align-items:baseline;flex-wrap:wrap;gap:0 14px;text-shadow:0 2px 24px rgba(11,9,7,.55)}
   .hero h1 .t1{font-size:clamp(74px,23vw,124px)}
-  .hero h1 .t2{font-size:clamp(26px,7.6vw,40px);margin-top:0;gap:12px}
+  .hero h1 .t2{font-size:clamp(26px,7.6vw,40px);margin-top:0;gap:12px;align-items:baseline}
   .hero h1 .t2::before{width:clamp(18px,6vw,32px);align-self:center;margin-top:.15em}
   .hero-txt>.eyebrow{order:2;margin-top:12px;font-size:11px;letter-spacing:.26em;gap:10px}
   .hero-txt>.eyebrow::before{width:24px}
@@ -254,8 +254,9 @@ dialog.mnav::backdrop{background:var(--ink)}
 .inter .ge{font-family:'Noto Serif Ethiopic',serif;font-weight:500;font-size:clamp(16px,1.4vw,19px);letter-spacing:.32em;color:var(--gold-lite);text-shadow:0 1px 12px rgba(0,0,0,.6)}
 .inter .lock{display:flex;align-items:baseline;justify-content:flex-start;gap:0 18px;flex-wrap:wrap;font-family:var(--display);line-height:1}
 .inter .am{font-size:clamp(48px,5vw,80px);font-weight:700;filter:drop-shadow(0 4px 24px rgba(0,0,0,.5))}
-.inter .mean{display:flex;align-items:center;gap:14px;font-weight:300;font-size:clamp(26px,2.5vw,40px);text-shadow:0 2px 16px rgba(0,0,0,.7)}
-.inter .mean::before{content:"";width:clamp(22px,2.4vw,36px);height:1px;background:var(--gold-lite)}
+.inter .mean{display:flex;align-items:baseline;gap:14px;font-weight:300;font-size:clamp(26px,2.5vw,40px);text-shadow:0 2px 16px rgba(0,0,0,.7)}
+/* the dash centres itself; the word alone sets the baseline, so ארץ sits on the same line as האגר */
+.inter .mean::before{content:"";align-self:center;width:clamp(22px,2.4vw,36px);height:1px;background:var(--gold-lite)}
 .inter p{font-family:var(--display);font-size:clamp(16px,1.45vw,21px);line-height:1.5;color:var(--on-dark);max-width:46ch;text-wrap:balance;margin-top:4px;text-shadow:0 2px 14px rgba(0,0,0,.85)}
 @media (max-width:760px){
   .frame{aspect-ratio:4/5;min-height:0;align-items:start;justify-items:center;text-align:center}
