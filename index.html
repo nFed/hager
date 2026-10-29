@@ -75,8 +75,8 @@ section{padding-block:clamp(88px,12vw,160px)}
 .menu-btn svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.4;fill:none}
 /* mobile menu: a full black frame, like a title card between scenes */
 dialog.mnav{width:100%;height:100%;max-width:none;max-height:none;margin:0;background:var(--ink);
-  padding:calc(env(safe-area-inset-top,0px) + 92px) max(24px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 40px) max(24px,env(safe-area-inset-left,0px));
-  display:none;flex-direction:column;justify-content:space-between;gap:32px;overflow-y:auto}
+  padding:calc(env(safe-area-inset-top,0px) + clamp(70px,12svh,92px)) max(24px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + clamp(16px,3svh,32px)) max(24px,env(safe-area-inset-left,0px));
+  display:none;flex-direction:column;justify-content:space-between;gap:clamp(14px,2.6svh,28px);overflow-y:auto}
 dialog.mnav[open]{display:flex;animation:mfade .45s ease-out both}
 dialog.mnav::backdrop{background:var(--ink)}
 @keyframes mfade{from{opacity:0}to{opacity:1}}
@@ -85,10 +85,10 @@ dialog.mnav::backdrop{background:var(--ink)}
 .mnav ol{list-style:none;margin:0;padding:0;display:grid;gap:4px;counter-reset:m}
 .mnav li{counter-increment:m;border-bottom:1px solid var(--line-2);animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
 .mnav li:nth-child(2){animation-delay:.04s}.mnav li:nth-child(3){animation-delay:.08s}.mnav li:nth-child(4){animation-delay:.12s}.mnav li:nth-child(5){animation-delay:.16s}.mnav li:nth-child(6){animation-delay:.2s}.mnav li:nth-child(7){animation-delay:.24s}
-.mnav li a{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-block:12px;text-decoration:none;font-family:var(--display);font-size:clamp(30px,9vw,40px);font-weight:500;line-height:1.15}
+.mnav li a{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-block:clamp(5px,1.3svh,12px);text-decoration:none;font-family:var(--display);font-size:clamp(22px,min(8.4vw,4.7svh),38px);font-weight:500;line-height:1.15}
 .mnav li a::after{content:counter(m,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--dim)}
 .mnav li a:hover,.mnav li a:focus-visible{color:var(--gold-lite)}
-.mnav .mfoot{display:grid;gap:16px}
+.mnav .mfoot{display:grid;gap:clamp(8px,1.6svh,16px)}
 .mnav .mfoot .btn{width:100%}
 .mnav .mfoot p{font-size:12px;letter-spacing:.2em;color:var(--gold-lite);text-align:center}
 @media (max-width:900px){.nav ul{display:none}.menu-btn{display:grid}.nav-end>.btn{display:none}}
@@ -341,7 +341,7 @@ footer p{color:var(--dim);font-size:13px;letter-spacing:.04em;max-width:80ch}
  
 <nav class="nav" id="nav" aria-label="ניווט ראשי">
   <div class="wrap">
-    <a class="brand" href="#top">האגר</a>
+    <a class="brand metal" href="#top">האגר</a>
     <ul>
       <li><a href="#screenings">הקרנות</a></li>
       <li><a href="#story">על הסרט</a></li>
