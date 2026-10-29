@@ -42,7 +42,9 @@
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
+/* anchor jumps stop just below the fixed bar (its scrolled height), not under it */
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+@media (max-width:900px){html{scroll-padding-top:calc(69px + env(safe-area-inset-top,0px))}}
 body{background:var(--ink);color:var(--on-dark);font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.75;direction:rtl;-webkit-font-smoothing:antialiased;overflow-x:clip}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--ink)}
 /* film grain */
