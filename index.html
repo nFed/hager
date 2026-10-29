@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#0B0907">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Heebo:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Heebo:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+Ethiopic:wght@500&display=swap">
 <style>
 /* Layout: a film's own site, not a poster. Full-bleed frames from the film carry the page; text sits on them like titles over picture. Quiet black between frames, gold only for the title and the laurels. */
 :root{
@@ -223,9 +223,9 @@ dialog.mnav::backdrop{background:var(--ink)}
 @media (max-width:620px){.srow{grid-template-columns:64px minmax(0,1fr);row-gap:14px}.srow .act{grid-column:2}.sdate .d{font-size:44px}}
 
 /* story: picture bleeds off the left edge */
-.story{position:relative;padding:0;min-height:min(92svh,860px);display:grid;align-items:center;overflow:hidden;isolation:isolate;background:var(--ink-2)}
+.story{position:relative;padding:0;min-height:min(92svh,860px);display:grid;align-items:center;overflow:hidden;isolation:isolate;background:var(--ink)}
 .story-img{position:absolute;inset-block:0;left:0;width:62%;z-index:-1}
-.story-img img{width:100%;height:100%;object-fit:cover;object-position:55% 30%;-webkit-mask-image:linear-gradient(to left,transparent 0%,#000 38%);mask-image:linear-gradient(to left,transparent 0%,#000 38%)}
+.story-img img{width:100%;height:100%;object-fit:cover;object-position:55% 30%;-webkit-mask-image:linear-gradient(to left,transparent 0%,#000 38%),linear-gradient(to top,transparent 0%,#000 28%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to left,transparent 0%,#000 38%),linear-gradient(to top,transparent 0%,#000 28%);mask-composite:intersect}
 .story .wrap{width:100%;padding-block:clamp(88px,10vw,140px)}
 .story .txt{display:grid;gap:26px;max-width:560px}
 .story p{color:var(--soft);max-width:54ch}
@@ -233,35 +233,24 @@ dialog.mnav::backdrop{background:var(--ink)}
 @media (max-width:900px){
   .story{display:block;min-height:0}
   .story-img{position:relative;width:100%;aspect-ratio:4/3;max-height:70svh}
-  .story-img img{-webkit-mask-image:linear-gradient(to top,transparent 0%,#000 40%);mask-image:linear-gradient(to top,transparent 0%,#000 40%);object-position:52% 25%}
+  .story-img img{-webkit-mask-image:linear-gradient(to top,transparent 0%,#000 40%);-webkit-mask-composite:source-over;mask-image:linear-gradient(to top,transparent 0%,#000 40%);mask-composite:add;object-position:52% 25%}
   .story .wrap{padding-top:0;margin-top:-60px;position:relative}
 }
 
-/* interlude: the waterfall frame shown whole and bright; the name of the film sits beside the falls on the dark cliff, never on the water */
-.inter{position:relative;padding:0;height:min(41.8vw,780px);min-height:440px;overflow:hidden;display:grid;align-items:center;justify-items:end;isolation:isolate}
-.inter-img{position:absolute;inset:0;z-index:-2;overflow:hidden}
-.inter-img img{position:absolute;inset:-6% 0;width:100%;height:112%;object-fit:cover;object-position:50% 40%;will-change:transform}
-.inter::before{content:"";position:absolute;inset:0;z-index:-1;background:
-  linear-gradient(to right,rgba(11,9,7,.78) 0%,rgba(11,9,7,.5) 22%,rgba(11,9,7,.12) 42%,transparent 58%),
-  linear-gradient(var(--ink) 0%,transparent 9%,transparent 91%,var(--ink) 100%)}
-.inter blockquote{display:grid;gap:14px;justify-items:start;text-align:start;padding-left:var(--gut-l);padding-right:var(--gut-r);width:min(100%,calc(var(--gut-l) + 400px));margin-inline-start:auto}
-.inter .gloss{font-size:12px;letter-spacing:.3em;color:var(--gold-lite);font-family:var(--sans);font-weight:500}
-.inter .lock{display:flex;align-items:baseline;gap:0 18px;flex-wrap:wrap}
-.inter .am{font-family:var(--display);font-size:clamp(64px,7.6vw,128px);font-weight:700;line-height:.9;filter:drop-shadow(0 6px 30px rgba(0,0,0,.45))}
-.inter .mean{display:flex;align-items:center;gap:14px;font-family:var(--display);font-weight:300;font-size:clamp(28px,3vw,46px);line-height:1;text-shadow:0 2px 16px rgba(0,0,0,.6)}
-.inter .mean::before{content:"";width:clamp(24px,3vw,44px);height:1px;background:var(--gold-lite)}
-.inter p{font-family:var(--display);font-size:clamp(18px,1.6vw,23px);max-width:28ch;line-height:1.5;color:var(--on-dark);text-shadow:0 2px 16px rgba(0,0,0,.75);text-wrap:pretty;margin-top:6px}
-.inter p strong{display:block;font-weight:500;color:var(--gold-lite)}
+/* interlude: one clean frame at the film's own 2.39:1, black above and below like a screen, the word set under it as a quiet entry */
+.inter{padding-block:clamp(8px,2vw,32px) clamp(72px,9vw,128px);display:grid;gap:clamp(28px,3.4vw,44px);justify-items:center;text-align:center}
+.inter-img{position:relative;width:100%;aspect-ratio:2.39/1;overflow:hidden;background:var(--ink-2)}
+.inter-img img{position:absolute;inset:-5% 0;width:100%;height:110%;object-fit:cover;object-position:50% 45%;will-change:transform}
+.inter blockquote{display:grid;gap:12px;justify-items:center;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.inter .ge{font-family:'Noto Serif Ethiopic',serif;font-weight:500;font-size:clamp(17px,1.5vw,20px);letter-spacing:.32em;color:var(--gold-lite)}
+.inter .lock{display:flex;align-items:baseline;justify-content:center;gap:0 18px;flex-wrap:wrap;font-family:var(--display);line-height:1}
+.inter .am{font-size:clamp(46px,4.6vw,72px);font-weight:700}
+.inter .mean{display:flex;align-items:center;gap:14px;font-weight:300;font-size:clamp(26px,2.4vw,38px)}
+.inter .mean::before{content:"";width:clamp(22px,2.4vw,36px);height:1px;background:var(--gold-lite)}
+.inter p{font-family:var(--display);font-size:clamp(17px,1.5vw,21px);line-height:1.55;color:var(--soft);max-width:46ch;text-wrap:balance;margin-top:4px}
 @media (max-width:760px){
-  /* phone: the frame stays clean, the words follow it as a title card */
-  .inter{height:auto;min-height:0;display:block;justify-items:normal;padding-bottom:clamp(56px,14vw,80px)}
-  .inter-img{position:relative;inset:auto;width:100%;aspect-ratio:1/.82;max-width:100%;
-    -webkit-mask-image:linear-gradient(transparent 0%,#000 8%,#000 80%,transparent 100%);mask-image:linear-gradient(transparent 0%,#000 8%,#000 80%,transparent 100%)}
-  .inter-img img{object-position:38% 50%}
-  .inter::before{display:none}
-  .inter blockquote{width:100%;margin-top:-28px;position:relative;justify-items:center;text-align:center;gap:12px}
-  .inter .lock{justify-content:center}
-  .inter p{margin-top:2px;max-width:30ch}
+  .inter-img{aspect-ratio:4/3}
+  .inter-img img{object-position:40% 50%}
 }
 
 /* characters */
@@ -453,9 +442,9 @@ footer p{color:var(--dim);font-size:13px;letter-spacing:.04em;max-width:80ch}
   <section class="inter" aria-label="משמעות שם הסרט">
     <div class="inter-img"><img id="interImg" src="img/waterfall-1920.webp" srcset="img/waterfall-960.webp 960w, img/waterfall-1920.webp 1920w" sizes="100vw" alt="מפל ברמות אתיופיה" loading="lazy"></div>
     <blockquote>
-      <span class="gloss">באמהרית</span>
+      <span class="ge" lang="am" title="האגר באמהרית">ሀገር</span>
       <span class="lock"><span class="am metal">האגר</span><span class="mean">ארץ</span></span>
-      <p><strong>מילה אחת ושתי ארצות.</strong>האדמה שעליה בנו את חייהם, והארץ שאליה חלמו להגיע במשך דורות.</p>
+      <p>באמהרית, ארץ. האדמה שעליה בנו את חייהם, והארץ שאליה חלמו להגיע במשך דורות.</p>
     </blockquote>
   </section>
 
