@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches)document.documentElement.classList.add('anim')</script>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
 <title>האגר – ארץ</title>
 <meta name="description" content="״האגר – ארץ״, סרטו של שמואל ברו. הסרט הישראלי הטוב ביותר ופרס ההישג האמנותי לצילום, פסטיבל חיפה ה-42 (2026).">
@@ -317,7 +318,8 @@ dialog.mnav::backdrop{background:var(--ink)}
 .prod-intro{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,6vw,110px);align-items:end;margin-bottom:clamp(56px,7vw,96px)}
 .prod-intro .lead{font-family:var(--display);font-size:clamp(22px,2.2vw,30px);line-height:1.5;font-weight:400;color:var(--on-dark);max-width:34ch;text-wrap:pretty}
 .prod-intro p:not(.lead){color:var(--soft);max-width:42ch}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(246,238,224,.25)}
+.stats{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.stats::before{content:"";position:absolute;top:0;inset-inline:0;height:1px;background:rgba(246,238,224,.25);transform-origin:right}
 .stat{padding:30px 0 0;display:grid;gap:12px;align-content:start;padding-inline-end:clamp(16px,3vw,40px)}
 .stat .k{font-size:12px;letter-spacing:.24em;color:var(--gold-lite);font-weight:500}
 .stat .n{font-family:var(--display);font-weight:400;font-size:clamp(40px,5.2vw,80px);white-space:nowrap;line-height:1;letter-spacing:-.02em}
@@ -398,6 +400,39 @@ footer{border-top:1px solid var(--line-2);padding-block:56px 64px;text-align:cen
 footer .wrap{display:grid;gap:14px;justify-items:center}
 footer .fb{font-family:var(--display);font-size:24px;font-weight:700}
 footer p{color:var(--dim);font-size:13px;letter-spacing:.04em;max-width:80ch}
+
+/* ===== motion on scroll =====
+   One vocabulary, used sparingly: things rise into place as they reach the screen, lines are drawn from the reading side,
+   and three set pieces borrow from film: the camp frame opens like a letterbox, the director's portrait develops like a print,
+   and the credits roll in one by one. Only opacity, transform, clip-path and one filter move. The `anim` flag is set in <head>
+   (never for reduced motion), and the script below marks each piece `.on` once it is seen. */
+.anim :is(main .eyebrow,main h2.big,.dir h2,.story p,.prod-intro p,.stat,.srow,.c,.strip figure,.q,.dir .txt>p,.dir small,.credits>div,.inter .lock,.inter .name p){opacity:0;transform:translateY(26px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1.2s cubic-bezier(.2,.7,.2,1),padding .35s;transition-delay:calc(var(--i,0) * var(--step,110ms))}
+.anim .on:is(main .eyebrow,main h2.big,.dir h2,.story p,.prod-intro p,.stat,.srow,.c,.strip figure,.q,.dir .txt>p,.dir small,.credits>div,.inter .lock,.inter .name p){opacity:1;transform:none}
+/* the gold rule before each eyebrow, and the line over the production facts, draw in from the right */
+.anim main .eyebrow::before,.anim .stats::before{transform:scaleX(0);transform-origin:right;transition:transform 1.3s cubic-bezier(.2,.7,.2,1) .25s}
+.anim main .eyebrow.on::before,.anim .stats.on::before{transform:none}
+/* the Amharic name writes itself, one letter at a time */
+.anim .inter .ge .ch{display:inline-block;opacity:0;transform:translateY(10px);filter:blur(4px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1),filter 1s ease;transition-delay:calc(var(--i,0) * 220ms)}
+.anim .inter .ge.on .ch{opacity:1;transform:none;filter:none}
+.inter .name{--step:380ms}
+/* story: the forest frame settles in from a slow push */
+.anim .story-img img{transform:scale(1.08);transition:transform 3.2s cubic-bezier(.2,.7,.2,1)}
+.anim .story-img.on img{transform:none}
+/* production: the camp frame opens like a letterbox */
+.anim .prod-frame{clip-path:inset(22% 0 22% 0);transition:clip-path 1.8s cubic-bezier(.65,0,.25,1)}
+.anim .prod-frame img{transform:scale(1.1);transition:transform 2.6s cubic-bezier(.2,.7,.2,1)}
+.anim .prod-frame.on{clip-path:inset(0 0 0 0)}.anim .prod-frame.on img{transform:none}
+/* director: the portrait develops like a print in the tray */
+.anim .dir .ph img{filter:grayscale(1) contrast(1.42) brightness(.15) blur(3px);transition:filter 2.6s ease .2s}
+.anim .dir .ph.on img{filter:grayscale(1) contrast(1.42) brightness(.9) blur(0)}
+/* credits roll faster than everything else */
+.credits{--step:70ms}
+/* buttons with a mouse: a slow light passes across the gold */
+@media (hover:hover){
+  .btn.solid{position:relative;overflow:hidden}
+  .btn.solid::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,250,232,.55) 50%,transparent 70%);transform:translateX(-120%);pointer-events:none}
+  .btn.solid:hover::after{transform:translateX(120%);transition:transform .9s ease}
+}
 </style>
 </head>
 <body>
@@ -656,6 +691,19 @@ const hhmm=t=>String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).pa
   if(!matchMedia('(hover:none)').matches||!('IntersectionObserver' in window))return;
   const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('in',e.isIntersecting)),{rootMargin:'-30% 0px -30% 0px'});
   document.querySelectorAll('.c').forEach(c=>io.observe(c));
+})();
+(function(){
+  /* reveal on scroll: siblings of the same kind get a stagger index; each piece is revealed once, then left alone */
+  if(!document.documentElement.classList.contains('anim'))return;
+  const ge=document.querySelector('.inter .ge');
+  if(ge){ge.setAttribute('aria-label',ge.textContent);ge.innerHTML=[...ge.textContent].map((c,i)=>`<span class="ch" aria-hidden="true" style="--i:${i}">${c}</span>`).join('');}
+  const sel='main .eyebrow,main h2.big,.dir h2,.story p,.prod-intro p,.stat,.srow,.c,.strip,.q,.dir .txt>p,.dir small,.credits>div,.inter .lock,.inter .name p,.inter .ge,.stats,.story-img,.prod-frame,.dir .ph';
+  const els=[...document.querySelectorAll(sel)];
+  els.forEach(el=>{const sib=[...el.parentElement.children].filter(c=>c.matches(sel));const i=sib.indexOf(el);if(i>0)el.style.setProperty('--i',Math.min(i,9));});
+  /* the filmstrip scrolls sideways, so its frames arrive together when the strip does, not one by one as they are swiped */
+  document.querySelectorAll('.strip figure').forEach((f,i)=>f.style.setProperty('--i',Math.min(i,4)));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');if(e.target.matches('.strip'))[...e.target.children].forEach(f=>f.classList.add('on'));io.unobserve(e.target);}}),{rootMargin:'0px 0px -10% 0px'});
+  els.forEach(el=>io.observe(el));
 })();
 (function(){
   const nav=document.getElementById('nav'),im=document.getElementById('interImg'),iq=document.querySelector('.inter .name');
