@@ -288,20 +288,24 @@ dialog.mnav::backdrop{background:var(--ink)}
   -webkit-mask-image:linear-gradient(to top,transparent 0%,rgba(0,0,0,.55) 22%,#000 48%),linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%);-webkit-mask-composite:source-in;
   mask-image:linear-gradient(to top,transparent 0%,rgba(0,0,0,.55) 22%,#000 48%),linear-gradient(to right,transparent 0%,#000 8%,#000 92%,transparent 100%);mask-composite:intersect}
 .prod .wrap{position:relative;margin-top:calc(-1 * clamp(64px,8vw,150px))}
-.prod .sec-head{margin-bottom:clamp(48px,6vw,80px);align-items:end}
+.prod .sec-head{margin-bottom:clamp(28px,3vw,44px)}
 .prod .sec-head h2{text-shadow:0 2px 30px rgba(11,9,7,.7)}
-.prod .sec-head p{font-size:18px;max-width:46ch}
+/* the heading's story first, in the display face; the wider context beside it, quieter */
+.prod-intro{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,6vw,110px);align-items:end;margin-bottom:clamp(56px,7vw,96px)}
+.prod-intro .lead{font-family:var(--display);font-size:clamp(22px,2.2vw,30px);line-height:1.5;font-weight:400;color:var(--on-dark);max-width:34ch;text-wrap:pretty}
+.prod-intro p:not(.lead){color:var(--soft);max-width:42ch}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(246,238,224,.25)}
 .stat{padding:30px 0 0;display:grid;gap:12px;align-content:start;padding-inline-end:clamp(16px,3vw,40px)}
 .stat .k{font-size:12px;letter-spacing:.24em;color:var(--gold-lite);font-weight:500}
-.stat .n{font-family:var(--display);font-weight:400;font-size:clamp(46px,5.6vw,84px);line-height:1;letter-spacing:-.02em}
+.stat .n{font-family:var(--display);font-weight:400;font-size:clamp(40px,5.2vw,80px);white-space:nowrap;line-height:1;letter-spacing:-.02em}
 .stat p{color:var(--soft);font-size:15px;max-width:30ch}
-.stat p+p{margin-top:-4px;color:var(--on-dark)}
 @media (max-width:760px){
   .stats{grid-template-columns:minmax(0,1fr)}.stat{padding-bottom:30px;border-bottom:1px solid var(--line-2)}
   .prod-frame{aspect-ratio:4/3.4;max-height:none}
   .prod-frame img{object-position:60% 30%;-webkit-mask-image:linear-gradient(to top,transparent 0%,rgba(0,0,0,.55) 24%,#000 50%);-webkit-mask-composite:source-over;mask-image:linear-gradient(to top,transparent 0%,rgba(0,0,0,.55) 24%,#000 50%);mask-composite:add}
   .prod .wrap{margin-top:-64px}
+  .prod-intro{grid-template-columns:minmax(0,1fr);gap:18px}
+  .stat .n{font-size:clamp(46px,13vw,64px)}
 }
 
 /* gallery filmstrip */
@@ -496,12 +500,15 @@ footer p{color:var(--dim);font-size:13px;letter-spacing:.04em;max-width:80ch}
     <div class="wrap">
       <div class="sec-head">
         <div class="l"><div class="eyebrow">מאחורי הקלעים</div><h2 class="big">שחזור קרוב מדי למקור</h2></div>
+      </div>
+      <div class="prod-intro">
+        <p class="lead">מחנה הפליטים בסודן שוחזר בלב נס ציונה. השחזור היה נאמן כל כך למציאות ולטראומה, שחלק מהניצבים לא היו מסוגלים להיכנס לאוהלים המדמים את המחנה.</p>
         <p>שיתוף פעולה ישראלי-אתיופי יוצא דופן, שצולם באתיופיה ובישראל מול אתגרים רבים, בצל מגפת הקורונה ומלחמות האזרחים באתיופיה.</p>
       </div>
       <div class="stats">
         <div class="stat"><span class="k">שנות הפקה</span><span class="n"><bdi dir="ltr">2017–2023</bdi></span><p>יותר מחמש שנים של עבודה. רבים מהניצבים הם בני הקהילה, שצעדו בעצמם במסע ההיסטורי.</p></div>
         <div class="stat"><span class="k">עונת הצילומים</span><span class="n">יולי–אוגוסט</span><p>באתיופיה, בשיא עונת הגשמים: גשמי זלעפות ליליים, מרבדי טל בבקרים, מפלים שוצפים ואור טבעי.</p></div>
-        <div class="stat"><span class="k">מחנה הפליטים</span><span class="n">נס ציונה</span><p>מחנה הפליטים בסודן שוחזר בלב נס ציונה, בעבודת ארט קפדנית.</p><p>השחזור היה נאמן כל כך למציאות ולטראומה, שחלק מהניצבים לא היו מסוגלים להיכנס לאוהלים.</p></div>
+        <div class="stat"><span class="k">מחנה הפליטים</span><span class="n">נס ציונה</span><p>שחזור המחנה בסודן נעשה בעבודת ארט קפדנית.</p></div>
       </div>
     </div>
   </section>
